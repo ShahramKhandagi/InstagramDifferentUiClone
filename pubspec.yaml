@@ -1,0 +1,77 @@
+name: instagram_different_ui_clone
+description: A new Flutter project.
+
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.3 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  hexcolor: ^3.0.1
+  dotted_border: ^2.0.0+2
+
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - images/
+  #   - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: GR
+      fonts:
+        - asset: assets/fonts/GilroyRegular.ttf
+          weight: 400
+
+    - family: GM
+      fonts:
+        - asset: assets/fonts/GilroyMedium.ttf
+          weight: 500
+
+
+    - family: GI
+      fonts:
+        - asset: assets/fonts/Grandista.ttf
+          
+
+    - family: GB
+      fonts:
+        - asset: assets/fonts/GilroyBold.ttf
+          weight: 700
+
+    - family: GEB
+      fonts:
+        - asset: assets/fonts/GilroyExtraBold.ttf
+          weight: 800
+          
+    - family: GH
+      fonts:
+        - asset: assets/fonts/GilroyHeavy.ttf
+          weight: 900
+
+    - family: SM
+      fonts:
+        - asset: assets/fonts/ShabnamMedium.ttf
+          weight: 500
+  #
+
