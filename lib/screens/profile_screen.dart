@@ -292,7 +292,7 @@ class ProfileScreen extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 200,
+                width: 150,
                 height: 40,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -312,7 +312,7 @@ class ProfileScreen extends StatelessWidget {
                 width: 16,
               ),
               Container(
-                width: 200,
+                width: 150,
                 height: 40,
                 child: OutlinedButton(
                   onPressed: () {},

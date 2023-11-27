@@ -1,4 +1,3 @@
-import 'dart:js';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: mainBackgroundColor,
       appBar: AppBar(
         centerTitle: false,
+        automaticallyImplyLeading: false,
         backgroundColor: mainBackgroundColor,
         elevation: 0,
         title: Text(
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
-                  child: _getPost(context),
+                  child: _getPost(context, index),
                 )
               ],
             );
@@ -65,10 +65,10 @@ class HomeScreen extends StatelessWidget {
     return Container(
       height: 98,
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: 5,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return index == 0 ? _getAddStoryWidget() : _getStoriesListBox();
+          return index == 0 ? _getAddStoryWidget() : _getStoriesListBox(index);
         },
       ),
     );
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
   Widget _getPostsList() {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
-      itemCount: 5,
+      itemCount: 3,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Column(
@@ -86,14 +86,14 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 12,
             ),
-            _getPost(context),
+            _getPost(context, index),
           ],
         );
       },
     );
   }
 
-  Container _getPost(context) {
+  Container _getPost(context, index) {
     return Container(
       height: 420,
       width: 350,
@@ -106,7 +106,9 @@ class HomeScreen extends StatelessWidget {
             right: 0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset('images/mypro.jpeg'),
+              child: Image.asset(
+                'images/post${index + 1}.jpg',
+              ),
             ),
           ),
           Positioned(
@@ -299,7 +301,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _getStoriesListBox() {
+  Widget _getStoriesListBox(index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
@@ -319,7 +321,10 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   height: 58,
                   width: 58,
-                  child: Image.asset('images/mypro.jpeg'),
+                  child: Image.asset(
+                    'images/profile$index.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

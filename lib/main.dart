@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:instagram_different_ui_clone/constants/constants.dart';
 import 'package:instagram_different_ui_clone/screens/add_new_content.dart';
@@ -6,6 +8,7 @@ import 'package:instagram_different_ui_clone/screens/main_screen.dart';
 import 'package:instagram_different_ui_clone/screens/notifications_screen.dart';
 import 'package:instagram_different_ui_clone/screens/profile_screen.dart';
 import 'package:instagram_different_ui_clone/screens/search_screen.dart';
+import 'package:instagram_different_ui_clone/screens/switch_account_screen.dart';
 
 void main() {
   runApp(Application());
@@ -36,7 +39,7 @@ class Application extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MainScreen(),
+      home: SplashScreen(),
     );
   }
 }
@@ -46,6 +49,16 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer? timer;
+
+    timer = Timer(Duration(seconds: 3), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SwitchAccountScreen(),
+        ),
+      );
+    });
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
