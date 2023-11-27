@@ -29,8 +29,9 @@ An Instagram App With New Ui built with Flutter
 
 
 ## App Screenshots 📷
-<img src="readme/1.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="readme/2.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="readme/3.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="readme/4.jpg" width="250"/>
-<img src="readme/5.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="readme/6.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="readme/7.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="readme/8.jpg" width="250"/>
+<img src="readme/1.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="readme/2.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="readme/3.jpg" width="250"/> 
+<img src="readme/4.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="readme/5.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="readme/6.jpg" width="250"/>
+<img src="readme/7.jpg" width="250"/> &nbsp;&nbsp;&nbsp;&nbsp;  <img src="readme/8.jpg" width="250"/>
 
 
 ---
