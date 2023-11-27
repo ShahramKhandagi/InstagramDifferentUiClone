@@ -4,140 +4,152 @@ import 'package:flutter/material.dart';
 import 'package:instagram_different_ui_clone/constants/constants.dart';
 
 class ShareBottomSheet extends StatelessWidget {
-  const ShareBottomSheet(this.controller, {super.key});
-  final ScrollController controller;
-
+  const ShareBottomSheet({this.controller, Key? key}) : super(key: key);
+  final ScrollController? controller;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 40.0, sigmaY: 40.0),
+        child: Container(
+          color: Color.fromRGBO(255, 255, 255, 0.09),
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          child: _getContent(context),
         ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromRGBO(255, 255, 255, 0.5),
-                  Color.fromRGBO(255, 255, 255, 0.2)
+      ),
+    );
+  }
+
+  Widget _getContent(BuildContext context) {
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: [
+        CustomScrollView(
+          controller: controller,
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Container(
+                    height: 5,
+                    width: 67,
+                    margin: EdgeInsets.only(top: 10, bottom: 22),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(100))),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Share',
+                        style: TextStyle(
+                          fontFamily: 'GB',
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 22),
+                        child: Icon(
+                          Icons.energy_savings_leaf_outlined,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Container(
+                    height: 46,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(13)),
+                      color: Color.fromRGBO(255, 255, 255, 0.4),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                              child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search User',
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                            ),
+                          )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
                 ],
               ),
             ),
-            child: ListView.builder(
-              itemCount: 1,
-              itemBuilder: (BuildContext context, int index) {
-                return _getBottomSheetDetails();
-              },
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate(((context, index) {
+                return _getItemGrid();
+              }), childCount: 100),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 10,
+                  mainAxisExtent: 110),
             ),
-          ),
-        ));
-  }
-
-  Widget _getBottomSheetDetails() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Text(
-                'Share',
-                style: TextStyle(
-                  fontFamily: 'GB',
-                  fontSize: 22,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 22),
-              child: Icon(
-                Icons.energy_savings_leaf_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
+            SliverPadding(padding: EdgeInsets.only(top: 120))
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22),
-          child: TextField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Color.fromRGBO(255, 255, 255, 0.4),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                borderSide: BorderSide(
-                    color: Color.fromRGBO(255, 255, 255, 0.4), width: 2),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              labelText: 'Search...',
-              labelStyle: TextStyle(
-                fontFamily: 'GM',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 30,
+        Positioned(
+          bottom: 47,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 13),
+              child: Text(
+                'Share',
+                style: TextStyle(fontFamily: 'GB', fontSize: 16),
               ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        _getContactsGridView()
+        )
       ],
     );
   }
 
-  Widget _getContactsGridView() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: GridView.builder(
-        shrinkWrap: true,
-        controller: controller,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: 16,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
+  Widget _getItemGrid() {
+    return Column(
+      children: [
+        Container(
+          width: 60,
+          height: 60,
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            child: Image.asset('images/mypro.jpeg'),
+          ),
         ),
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              Container(
-                width: 65,
-                height: 65,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset('images/mypro.jpeg'),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              Text(
-                'shahram',
-                style: TextStyle(
-                    fontFamily: 'GM', fontSize: 14, color: Colors.white),
-              ),
-            ],
-          );
-        },
-      ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          'shahramkhandagi',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontFamily: 'GB', fontSize: 12, color: Colors.white),
+        )
+      ],
     );
   }
 }

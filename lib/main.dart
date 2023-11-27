@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_different_ui_clone/constants/constants.dart';
+import 'package:instagram_different_ui_clone/screens/add_new_content.dart';
 import 'package:instagram_different_ui_clone/screens/home_screen.dart';
+import 'package:instagram_different_ui_clone/screens/main_screen.dart';
+import 'package:instagram_different_ui_clone/screens/notifications_screen.dart';
+import 'package:instagram_different_ui_clone/screens/profile_screen.dart';
+import 'package:instagram_different_ui_clone/screens/search_screen.dart';
 
 void main() {
   runApp(Application());
@@ -31,7 +36,7 @@ class Application extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: MainScreen(),
     );
   }
 }

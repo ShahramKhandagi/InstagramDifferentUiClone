@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,24 +6,8 @@ import 'package:instagram_different_ui_clone/constants/constants.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:instagram_different_ui_clone/screens/share_bottomsheet.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  Duration _duration = Duration(milliseconds: 500);
-  Tween<Offset> _tween = Tween(begin: Offset(0, 1), end: Offset(0, 0));
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: _duration);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
         elevation: 0,
         title: Text(
           'Instagram',
-          style: TextStyle(fontFamily: 'GI'),
+          style: TextStyle(fontFamily: 'GI', color: Colors.white),
         ),
         actions: [
           Padding(
@@ -48,38 +33,31 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      barrierColor: Colors.transparent,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return DraggableScrollableSheet(
-                          initialChildSize: 0.4,
-                          minChildSize: 0.2,
-                          maxChildSize: 0.7,
-                          builder: (context, scrollController) {
-                            return ShareBottomSheet(scrollController);
-                          },
-                        );
-                      },
-                    );
-                  },
-                  child: Text('SHow bottom sheet')),
-              SizedBox(
-                height: 120,
-                child: _getStoriesList(),
-              ),
-              _getPostsList(),
-            ],
+          child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: _getStoriesList(),
           ),
-        ),
-      ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+            return Column(
+              children: [
+                SizedBox(
+                  height: 22,
+                ),
+                _getHeaderPost(),
+                SizedBox(
+                  height: 24,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: _getPost(context),
+                )
+              ],
+            );
+          }, childCount: 4))
+        ],
+      )),
     );
   }
 
@@ -108,14 +86,14 @@ class _HomeScreenState extends State<HomeScreen>
             SizedBox(
               height: 12,
             ),
-            _getPost(),
+            _getPost(context),
           ],
         );
       },
     );
   }
 
-  Container _getPost() {
+  Container _getPost(context) {
     return Container(
       height: 420,
       width: 350,
@@ -202,9 +180,36 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         Row(
                           children: [
-                            Icon(
-                              Icons.share_outlined,
-                              color: Colors.white,
+                            InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    barrierColor: Colors.transparent,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (BuildContext context) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom),
+                                        child: DraggableScrollableSheet(
+                                          initialChildSize: 0.5,
+                                          minChildSize: 0.2,
+                                          maxChildSize: 0.7,
+                                          builder: (context, controler) {
+                                            return ShareBottomSheet(
+                                              controller: controler,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    });
+                              },
+                              child: Icon(
+                                Icons.share_outlined,
+                                color: Colors.white,
+                              ),
                             ),
                             SizedBox(
                               width: 6,
